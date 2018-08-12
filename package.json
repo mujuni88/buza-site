@@ -8,9 +8,15 @@
     "gatsby-link": "^1.6.46",
     "gatsby-plugin-react-helmet": "^2.0.11",
     "gatsby-plugin-styled-components": "^2.0.11",
+    "gatsby-plugin-typography": "^1.7.19",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.0.5",
-    "styled-components": "^3.4.2"
+    "react-typography": "^0.16.13",
+    "styled-components": "^3.4.2",
+    "styled-media-query": "^2.0.2",
+    "typography": "^0.16.17",
+    "typography-theme-bootstrap": "^0.16.7",
+    "webfontloader": "^1.6.28"
   },
   "keywords": [
     "gatsby"

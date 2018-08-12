@@ -4,8 +4,13 @@ import Helmet from 'react-helmet'
 import styled from 'styled-components'
 
 import Header from '../components/header'
-import './index.css'
+import WebFont from 'webfontloader';
 
+WebFont.load({
+  google: {
+    families: ['Tangerine', 'serif']
+  }
+})
 
 const Wrapper = styled.div`
   display: flex;
