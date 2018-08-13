@@ -1,5 +1,5 @@
-import Typography from "typography"
-import theme from "typography-theme-bootstrap"
+import Typography from 'typography'
+import theme from 'typography-theme-bootstrap'
 
 const typography = new Typography(theme)
 
