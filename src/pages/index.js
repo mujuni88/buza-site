@@ -30,7 +30,7 @@ const IndexPage = () => (
 )
 
 const cursor = {
-  show: false,
+  show: true,
   hideWhenDone: true,
 }
 
