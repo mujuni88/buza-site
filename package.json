@@ -6,6 +6,7 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.5.1",
     "gatsby": "next",
+    "gatsby-plugin-favicon": "^3.1.2",
     "gatsby-plugin-react-helmet": "^2.0.11",
     "gatsby-plugin-styled-components": "^3.0.0-beta.3",
     "gatsby-plugin-typography": "^1.7.19",
