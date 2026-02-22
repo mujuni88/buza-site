@@ -2,3 +2,9 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# Local Netlify folder
+.netlify
+
+# Local beads database
+.beads
