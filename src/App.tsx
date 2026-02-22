@@ -213,7 +213,7 @@ function MorphingRule({ visible }: { visible: boolean }) {
 }
 
 export default function App() {
-  const { done } = useTypingEffect('JOE BUZA', 130)
+  const { displayed, done } = useTypingEffect('JOE BUZA', 130)
   const { theme, toggle } = useTheme()
 
   return (
@@ -228,8 +228,11 @@ export default function App() {
 
       <div className="brutalist-content">
         {/* Massive name */}
-        <h1 className="brutalist-name" aria-label="Joe Buza">
-          <img className="brutalist-logo" src="/logo.svg" alt="JB logo" />
+        <h1 className="brutalist-name">
+          {displayed}
+          <span className="block-cursor" aria-hidden="true">
+            {'\u2588'}
+          </span>
         </h1>
 
         {/* Morphing red rule */}
