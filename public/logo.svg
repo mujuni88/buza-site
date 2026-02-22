@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">JB logo</title>
+  <desc id="desc">White JB lettering on black with red square accent.</desc>
+  <rect width="512" height="512" fill="#000" />
+  <text
+    x="28"
+    y="360"
+    fill="#f2f2f2"
+    font-family="Arial Black, Arial, sans-serif"
+    font-size="300"
+    font-weight="900"
+    letter-spacing="-18"
+  >
+    JB
+  </text>
+  <rect x="418" y="418" width="94" height="94" fill="#e53935" />
+</svg>
