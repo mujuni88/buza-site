@@ -1,69 +1,407 @@
 @import 'tailwindcss';
 
+/* ============================================
+   THEME: CSS Custom Properties
+   ============================================ */
+
+:root {
+  --bg: #f0ede8;
+  --text: #1a1a1a;
+  --accent: #e53e3e;
+  --muted: #8c8279;
+  --surface: #e2ddd5;
+}
+
+[data-theme='dark'] {
+  --bg: #000000;
+  --text: #ffffff;
+  --accent: #e53e3e;
+  --muted: #777777;
+  --surface: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #000000;
+    --text: #ffffff;
+    --accent: #e53e3e;
+    --muted: #777777;
+    --surface: #1a1a1a;
+  }
+}
+
+/* ============================================
+   TAILWIND THEME
+   ============================================ */
+
 @theme {
-  --font-display: 'Instrument Serif', serif;
-  --font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Archivo Black', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* Paper grain texture */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.035;
-  pointer-events: none;
-  z-index: 50;
-}
-
-/* Cursor blink */
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-.animate-blink {
-  animation: blink 1s step-end infinite;
-}
-
-/* Social link hover underline */
-.social-link {
-  position: relative;
-}
-
-.social-link::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 4px;
-  right: 4px;
-  height: 1px;
-  background-color: #b94a2f;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.social-link:hover::after,
-.social-link:focus-visible::after {
-  transform: scaleX(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-blink {
-    animation: none;
-  }
-
-  .social-link::after {
-    transition: none;
-  }
-}
+/* ============================================
+   BASE
+   ============================================ */
 
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================
+   LAYOUT: Brutalist Main
+   ============================================ */
+
+.brutalist-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 2rem 2rem 2rem clamp(2rem, 8vw, 8rem);
+  overflow: hidden;
+}
+
+.brutalist-content {
+  position: relative;
+  max-width: 80rem;
+}
+
+/* ============================================
+   NAME: Massive Archivo Black
+   ============================================ */
+
+.brutalist-name {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 20vw, 16rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (min-width: 1280px) {
+  .brutalist-name {
+    white-space: nowrap;
+  }
+}
+
+/* ============================================
+   BLOCK CURSOR
+   ============================================ */
+
+.block-cursor {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  margin-left: 10px;
+  vertical-align: middle;
+  font-size: 0;
+  line-height: 0;
+}
+
+/* ============================================
+   SVG MORPHING RULE
+   ============================================ */
+
+.morphing-rule {
+  display: block;
+  width: 0;
+  max-width: 40rem;
+  height: 8px;
+  margin-top: 1.5rem;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: visible;
+}
+
+.morphing-rule--visible {
+  width: 100%;
+}
+
+
+/* ============================================
+   SCANLINE OVERLAY
+   ============================================ */
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 90;
+}
+
+[data-theme='dark'] .scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.02) 2px,
+    rgba(255, 255, 255, 0.02) 4px
+  );
+}
+
+/* ============================================
+   GEOMETRIC PARTICLES
+   ============================================ */
+
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  opacity: 0.3;
+  animation: particle-drift linear infinite;
+}
+
+.particle:nth-child(odd) {
+  opacity: 0.2;
+  animation-name: particle-drift-alt;
+}
+
+@keyframes particle-drift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(25px, -35px); }
+  50% { transform: translate(-20px, -60px); }
+  75% { transform: translate(30px, -25px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes particle-drift-alt {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-30px, 20px); }
+  50% { transform: translate(15px, 45px); }
+  75% { transform: translate(-20px, 10px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ============================================
+   CODE INDEX: Social Links
+   ============================================ */
+
+.code-index {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.code-index__link {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5em;
+  padding: 0.5em 0.6em;
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+.code-index__link--visible {
+  animation: link-stagger-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--stagger-delay, 0ms);
+}
+
+@keyframes link-stagger-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Red background bar slides in from left on hover */
+.code-index__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.code-index__link:hover::before,
+.code-index__link:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.code-index__link:hover,
+.code-index__link:focus-visible {
+  color: #ffffff;
+}
+
+.code-index__link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.code-index__number {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.code-index__link:hover .code-index__number,
+.code-index__link:focus-visible .code-index__number {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.code-index__label {
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.dot-leader {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  opacity: 0.4;
+  overflow: hidden;
+  flex: 1;
+  letter-spacing: 0.15em;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.code-index__link:hover .dot-leader,
+.code-index__link:focus-visible .dot-leader {
+  opacity: 0.15;
+  color: #ffffff;
+}
+
+/* ============================================
+   THEME TOGGLE
+   ============================================ */
+
+.theme-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--muted);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.brutalist-footer {
+  position: absolute;
+  bottom: 1.5rem;
+  left: clamp(2rem, 8vw, 8rem);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.brutalist-footer__link {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.brutalist-footer__link:hover {
+  color: var(--accent);
+}
+
+.brutalist-footer__sep {
+  margin: 0 0.5rem;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink,
+  .glitch,
+  .code-index__link--visible {
+    animation: none;
+  }
+
+  .particle {
+    animation: none;
+    display: none;
+  }
+
+  .morphing-rule {
+    transition: none;
+  }
+
+  .morphing-rule--visible {
+    width: 100%;
+  }
+
+  .morphing-rule animate {
+    display: none;
+  }
+
+  .scanlines {
+    display: none;
+  }
+
+  .code-index__link {
+    opacity: 1;
+    transform: none;
+  }
+
+  .code-index__link::before {
+    transition: none;
+  }
+
+  body {
+    transition: none;
+  }
 }

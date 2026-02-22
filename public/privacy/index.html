@@ -3,100 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light" />
-    <meta name="theme-color" content="#f4efe6" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f0ede8" />
     <title>Privacy Policy — Joe Buza</title>
     <meta name="description" content="Privacy Policy for Joe Buza's personal applications" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Instrument+Serif&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <style>
+      :root {
+        --bg: #f0ede8; --text: #1a1a1a; --accent: #e53e3e;
+        --muted: #8c8279; --surface: #e2ddd5;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #000000; --text: #ffffff; --accent: #e53e3e;
+          --muted: #777777; --surface: #1a1a1a;
+        }
+      }
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
+      html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
       body {
-        font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
-        background-color: #f4efe6;
-        color: #1a1816;
-        line-height: 1.7;
-        font-size: 15px;
-      }
-      .noise {
-        position: fixed;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        opacity: 0.035;
-        pointer-events: none;
-        z-index: 50;
+        font-family: 'JetBrains Mono', monospace;
+        background-color: var(--bg); color: var(--text);
+        line-height: 1.7; font-size: 14px;
       }
       main {
-        position: relative;
-        max-width: 640px;
-        margin: 0 auto;
-        padding: 80px 24px 120px;
+        max-width: 640px; padding: 80px 24px 120px;
+        margin-left: clamp(2rem, 8vw, 8rem);
       }
       a.back {
-        display: inline-block;
-        font-size: 13px;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #8c8279;
-        text-decoration: none;
-        margin-bottom: 48px;
-        transition: color 0.3s;
+        display: inline-block; font-size: 12px; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--muted); text-decoration: none;
+        margin-bottom: 48px; transition: color 0.3s;
       }
-      a.back:hover { color: #1a1816; }
+      a.back:hover { color: var(--accent); }
       h1 {
-        font-family: 'Instrument Serif', serif;
-        font-size: clamp(2rem, 6vw, 3.5rem);
-        font-weight: 400;
-        letter-spacing: -0.02em;
-        line-height: 1.1;
-        margin-bottom: 8px;
+        font-family: 'Archivo Black', sans-serif;
+        font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 400;
+        letter-spacing: -0.02em; line-height: 0.9;
+        text-transform: uppercase; margin-bottom: 8px;
       }
-      h1 span { color: #b94a2f; }
-      .rule {
-        width: 48px;
-        height: 1px;
-        background: #b94a2f;
-        margin: 24px 0 32px;
+      h1 span {
+        display: inline-block; width: 20px; height: 20px;
+        background: var(--accent); margin-left: 10px;
+        vertical-align: middle; font-size: 0; line-height: 0;
       }
+      .rule { width: 48px; height: 4px; background: var(--accent); margin: 24px 0 32px; }
       .updated {
-        font-size: 13px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: #8c8279;
-        margin-bottom: 40px;
+        font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+        color: var(--muted); margin-bottom: 40px;
       }
       h2 {
-        font-family: 'Instrument Serif', serif;
-        font-size: 1.4rem;
-        font-weight: 400;
-        margin: 40px 0 12px;
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 1.1rem; font-weight: 400; text-transform: uppercase;
+        letter-spacing: 0.02em; margin: 40px 0 12px;
       }
-      p { color: #44403c; margin-bottom: 16px; }
-      ul { color: #44403c; margin-bottom: 16px; padding-left: 20px; }
+      p { color: var(--text); opacity: 0.8; margin-bottom: 16px; }
+      ul { color: var(--text); opacity: 0.8; margin-bottom: 16px; padding-left: 20px; }
       li { margin-bottom: 6px; }
       a.contact {
-        color: #b94a2f;
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.3s;
+        color: var(--accent); text-decoration: none;
+        border-bottom: 1px solid transparent; transition: border-color 0.3s;
       }
-      a.contact:hover { border-bottom-color: #b94a2f; }
+      a.contact:hover { border-bottom-color: var(--accent); }
     </style>
   </head>
   <body>
-    <div class="noise"></div>
     <main>
-      <a href="/" class="back">&larr; Home</a>
-      <h1>Privacy Policy<span>.</span></h1>
+      <a href="/" class="back">&larr; Back</a>
+      <h1>Privacy Policy<span></span></h1>
       <div class="rule"></div>
       <p class="updated">Last updated: February 2026</p>
 
